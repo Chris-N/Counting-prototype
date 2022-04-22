@@ -10,6 +10,9 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+# Ignore any builds made
+/Builds*/
+
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
 
