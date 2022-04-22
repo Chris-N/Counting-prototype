@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SwingController : MonoBehaviour
 {
-    Rigidbody rb;
     public float speed;
+    Rigidbody rb;
+    bool isSwinging;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,12 +17,24 @@ public class SwingController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Spacebar - TORQUE");
-            rb.AddRelativeTorque(Vector3.up * -speed, ForceMode.Impulse);
+            isSwinging = true;
         }
+    }
+
+    void FixedUpdate()
+    {
+        if (isSwinging)
+            Swing();
+    }
+
+    void Swing()
+    {
+        rb.AddRelativeTorque(Vector3.up * -speed, ForceMode.Impulse);
+        isSwinging = false;
     }
 }
