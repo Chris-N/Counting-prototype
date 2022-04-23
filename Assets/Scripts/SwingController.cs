@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SwingController : MonoBehaviour
 {
-    public float speed;
     Rigidbody rb;
+    [SerializeField] GameObject baseball;
+    [SerializeField] float speed;
     bool isSwinging;
-
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,16 @@ public class SwingController : MonoBehaviour
         {
             Debug.Log("Spacebar - TORQUE");
             isSwinging = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("2 - Spawn ball");
+            Instantiate(baseball, new Vector3(0.60f, 1.18f, 19.82f), baseball.transform.rotation);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Debug.Log("4 - Spawn jump ball");
+            Instantiate(baseball, new Vector3(0.65f, 0.53f, 0.69f), baseball.transform.rotation);
         }
     }
 

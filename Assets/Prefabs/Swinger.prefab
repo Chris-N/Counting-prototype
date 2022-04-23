@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 723140096082059935}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Bat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481735f8733719d44b31c0c02bea261c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseball: {fileID: 6646904355492438916, guid: d0c7bc58425d70946ae0e700efba541a, type: 3}
   speed: 100
-  newCenterOfMass: {x: 0, y: 0, z: 0}
 --- !u!1 &723140096168470635
 GameObject:
   m_ObjectHideFlags: 0
