@@ -27,12 +27,7 @@ public class SwingController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Debug.Log("2 - Spawn ball");
-            Instantiate(baseball, new Vector3(0.60f, 1.18f, 19.82f), baseball.transform.rotation);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Debug.Log("4 - Spawn jump ball");
-            Instantiate(baseball, new Vector3(0.65f, 0.53f, 0.69f), baseball.transform.rotation);
+            Instantiate(baseball, new Vector3(1.04f, 1.4f, 17.63f), baseball.transform.rotation);
         }
     }
 
