@@ -3021,6 +3021,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 723140096168470633, guid: b77c6db871475b243ab2b1b8ab01c9ea, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b049bd241bb402a43a03a88a222bcaec, type: 2}
     - target: {fileID: 723140096337066672, guid: b77c6db871475b243ab2b1b8ab01c9ea, type: 3}
       propertyPath: m_Name
       value: Swinger
