@@ -5,7 +5,6 @@ using UnityEngine;
 public class SwingController : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] GameObject baseball;
     [SerializeField] float speed;
     bool isSwinging;
 
@@ -21,13 +20,8 @@ public class SwingController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Spacebar - TORQUE");
+            Debug.Log("Spacebar - TORQUE: Audio swing!");
             isSwinging = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Debug.Log("2 - Spawn ball");
-            Instantiate(baseball, new Vector3(1.04f, 1.4f, 17.63f), baseball.transform.rotation);
         }
     }
 

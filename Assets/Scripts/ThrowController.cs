@@ -6,8 +6,10 @@ public class ThrowController : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] float speed;
+    [SerializeField] float speedY = 0.5f;
+    [SerializeField] float speedZ = 3.0f;
+
     bool isShot = false;
-    bool isJump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,8 @@ public class ThrowController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("1 - SHOOT!");
+            Debug.Log("1 - SHOOT!, Audio: shoot!");
             isShot = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Debug.Log("3 - Jump!");
-            isJump = true;
         }
     }
 
@@ -34,22 +31,17 @@ public class ThrowController : MonoBehaviour
     {
         if (isShot)
         {
-            Vector3 force1 = Vector3.back * (speed * 1.5f);
-            Vector3 force2 = Vector3.up * (speed / 4);
+            Vector3 force1 = Vector3.back * speedZ;
+            Vector3 force2 = Vector3.up * speedY;
 
             Vector3 result = force1 + force2;
-            //rb.AddForce(force1, ForceMode.Impulse);
-            //rb.AddForce(force2, ForceMode.Impulse);
-
             rb.AddForce(result, ForceMode.Impulse);
             isShot = false;
         }
-        if (isJump)
-        {
-            Vector3 jump = Vector3.up;
-            rb.AddForce(jump, ForceMode.Impulse);
-            isJump = false;
-        }
+    }
 
+    public void ToggleShot()
+    {
+        isShot = !isShot;
     }
 }

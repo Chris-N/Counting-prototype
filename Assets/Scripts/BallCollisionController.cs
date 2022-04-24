@@ -20,7 +20,7 @@ public class BallCollisionController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bat"))
         {
-            Debug.Log("HIT!");
+            Debug.Log("HIT! - Audio: boom");
         }
     }
 }
