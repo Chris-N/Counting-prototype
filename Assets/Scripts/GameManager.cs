@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,13 +9,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject spawnPoint;
     [SerializeField] int totalBalls;
     [SerializeField] int ballCount = 0;
+    [SerializeField] int ballsHitCount = 0;
+    [SerializeField] TextMeshProUGUI hitsText;
+    [SerializeField] TextMeshProUGUI totalsText;
 
     bool isAuto;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        DisplayUI();
     }
 
     // Update is called once per frame
@@ -47,10 +51,22 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
+            DisplayUI();
 
             yield return new WaitForSeconds(2.0f);
             ball.GetComponent<ThrowController>().ToggleShot();
             ballCount++;
         }
+    }
+
+    void DisplayUI()
+    {
+        hitsText.text = $"Hits: {ballsHitCount}";
+        totalsText.text = $"Total: {ballCount}/{totalBalls}";
+    }
+    public void IncrementBallHitCount()
+    {
+        ballsHitCount++;
+        DisplayUI();
     }
 }
