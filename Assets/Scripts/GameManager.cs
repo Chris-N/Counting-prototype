@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int totalBalls;
     [SerializeField] int ballCount = 0;
     [SerializeField] int ballsHitCount = 0;
+    [SerializeField] GameObject popup;
     [SerializeField] TextMeshProUGUI hitsText;
     [SerializeField] TextMeshProUGUI totalsText;
 
@@ -24,13 +25,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            popup.SetActive(!popup.activeSelf);
+        }
         if (Input.GetKeyDown(KeyCode.Alpha2) && !isAuto)
         {
             Debug.Log("2 - Spawn ball");
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
             ballCount++;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (isAuto)
             {
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour
 
 
             isAuto = true;
-            Debug.Log("3 - AUTO Spawn/launch ball");
+            Debug.Log("a - AUTO Spawn/launch ball");
             StartCoroutine(AutoSpawnLaunchBall());
         }
     }
@@ -51,11 +56,11 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
-            DisplayUI();
 
             yield return new WaitForSeconds(2.0f);
             ball.GetComponent<ThrowController>().ToggleShot();
             ballCount++;
+            DisplayUI();
         }
     }
 
