@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
             ballCount++;
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.LeftCommand))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (isAuto)
             {
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
 
             isAuto = true;
-            Debug.Log("left-ctrl/cmd - AUTO Spawn/launch ball");
+            Debug.Log("A - AUTO Spawn/launch ball");
             StartCoroutine(AutoSpawnLaunchBall());
         }
     }

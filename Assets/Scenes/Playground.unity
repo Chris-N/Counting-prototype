@@ -1338,13 +1338,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press "left-ctrl" - Auto spawn/launch ball
+  m_text: 'Press ''a'' - Auto spawn/launch ball
 
-    Press "Spacebar" - To
-    swing
+    Press "Spacebar" - To swing
 
 
-    Press ''1'' - launch ball
+    Press
+    ''1'' - launch ball
 
     Press ''2'' - spawn ball
 
