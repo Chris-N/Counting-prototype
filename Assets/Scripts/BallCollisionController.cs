@@ -7,6 +7,8 @@ public class BallCollisionController : MonoBehaviour
     GameManager gm;
     [SerializeField] ParticleSystem collisionParticle;
     [SerializeField] ParticleSystem trailParticle;
+    ParticleSystem trailParticleInstance;
+
     bool isTrailParticleOn;
 
     // Start is called before the first frame update
@@ -21,9 +23,7 @@ public class BallCollisionController : MonoBehaviour
         ClearResource();
 
         if (isTrailParticleOn)
-        {
-
-        }
+            trailParticleInstance.transform.position = gameObject.transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,8 +36,8 @@ public class BallCollisionController : MonoBehaviour
             collisionParticle.Play();
 
             trailParticle.transform.position = gameObject.transform.position;
-            Instantiate(trailParticle);
-            trailParticle.Play();
+            trailParticleInstance = Instantiate(trailParticle);
+            trailParticleInstance.Play();
             isTrailParticleOn = true;
 
             gm.IncrementBallHitCount();
@@ -45,9 +45,11 @@ public class BallCollisionController : MonoBehaviour
     }
     private void ClearResource()
     {
-        if(gameObject.transform.position.y < 0)
+        if(gameObject.transform.position.y < -20)
         {
             isTrailParticleOn = false;
+            if(trailParticleInstance)
+                Destroy(trailParticleInstance.gameObject);
             Destroy(gameObject);
         }
 
