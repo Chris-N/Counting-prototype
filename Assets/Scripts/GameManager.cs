@@ -29,18 +29,21 @@ public class GameManager : MonoBehaviour
         {
             popup.SetActive(!popup.activeSelf);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !isAuto)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !isAuto)
         {
-            Debug.Log("2 - Spawn ball");
-            Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
+            Debug.Log("1 - Spawn, SHOOT!, Audio: shoot!");
+            Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
+                .GetComponent<ThrowController>()
+                .ToggleShot();
             ballCount++;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (isAuto)
             {
-                // WIP - Destroy ball, if exists
+                isAuto = false;
                 StopCoroutine(AutoSpawnLaunchBall());
+                return;
             }
 
 
@@ -52,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AutoSpawnLaunchBall()
     {
-        while (ballCount < totalBalls)
+        while (ballCount < totalBalls && isAuto)
         {
             yield return new WaitForSeconds(0.5f);
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);

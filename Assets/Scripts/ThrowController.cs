@@ -20,17 +20,13 @@ public class ThrowController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !hasFired)
-        {
-            Debug.Log("1 - SHOOT!, Audio: shoot!");
-            isShot = true;
-        }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isShot)
+        if (isShot && !hasFired)
         {
             Vector3 force1 = Vector3.back * speedZ;
             Vector3 force2 = Vector3.up * speedY;
