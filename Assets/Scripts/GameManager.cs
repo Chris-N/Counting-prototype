@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject popup;
     [SerializeField] TextMeshProUGUI hitsText;
     [SerializeField] TextMeshProUGUI totalsText;
+    [SerializeField] GameObject gameOn;
+    [SerializeField] GameObject gameOff;
+    [SerializeField] GameObject practice;
 
     bool isAuto;
 
@@ -29,25 +32,29 @@ public class GameManager : MonoBehaviour
         {
             popup.SetActive(!popup.activeSelf);
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TurnPractice();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isAuto)
         {
             Debug.Log("1 - Spawn, SHOOT!, Audio: shoot!");
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
                 .GetComponent<ThrowController>()
                 .ToggleShot();
-            ballCount++;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (isAuto)
             {
+                TurnGameOff();
                 isAuto = false;
                 StopCoroutine(AutoSpawnLaunchBall());
                 return;
             }
 
-
             isAuto = true;
+            TurnGameOn();
             Debug.Log("A - AUTO Spawn/launch ball");
             StartCoroutine(AutoSpawnLaunchBall());
         }
@@ -75,7 +82,28 @@ public class GameManager : MonoBehaviour
     }
     public void IncrementBallHitCount()
     {
+        if (!gameOn.activeSelf)
+            return;
         ballsHitCount++;
         DisplayUI();
+    }
+
+    void TurnGameOn()
+    {
+        gameOn.SetActive(true);
+        gameOff.SetActive(false);
+        practice.SetActive(false);
+    }
+    void TurnGameOff()
+    {
+        gameOn.SetActive(false);
+        gameOff.SetActive(true);
+        practice.SetActive(false);
+    }
+    void TurnPractice()
+    {
+        gameOn.SetActive(false);
+        gameOff.SetActive(false);
+        practice.SetActive(true);
     }
 }

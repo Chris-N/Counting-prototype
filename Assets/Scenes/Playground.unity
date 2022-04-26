@@ -1114,6 +1114,9 @@ MonoBehaviour:
   popup: {fileID: 1391212205}
   hitsText: {fileID: 466646438}
   totalsText: {fileID: 557124587}
+  gameOn: {fileID: 660135105}
+  gameOff: {fileID: 1823990640}
+  practice: {fileID: 2146877284}
 --- !u!4 &917871000
 Transform:
   m_ObjectHideFlags: 0
@@ -1988,7 +1991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1823990641
 RectTransform:
   m_ObjectHideFlags: 0
