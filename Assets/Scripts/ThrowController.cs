@@ -9,6 +9,7 @@ public class ThrowController : MonoBehaviour
     [SerializeField] float speedY = 0.5f;
     [SerializeField] float speedZ = 3.0f;
 
+    [SerializeField] bool hasFired = false;
     bool isShot = false;
 
     // Start is called before the first frame update
@@ -19,7 +20,7 @@ public class ThrowController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !hasFired)
         {
             Debug.Log("1 - SHOOT!, Audio: shoot!");
             isShot = true;
@@ -37,6 +38,7 @@ public class ThrowController : MonoBehaviour
             Vector3 result = force1 + force2;
             rb.AddForce(result, ForceMode.Impulse);
             isShot = false;
+            hasFired = true;
         }
     }
 
