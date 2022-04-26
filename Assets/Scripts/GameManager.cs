@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,11 +33,15 @@ public class GameManager : MonoBehaviour
         {
             popup.SetActive(!popup.activeSelf);
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
             TurnPractice();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !isAuto)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && practice.activeSelf)
         {
             Debug.Log("1 - Spawn, SHOOT!, Audio: shoot!");
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
@@ -55,7 +60,6 @@ public class GameManager : MonoBehaviour
 
             isAuto = true;
             TurnGameOn();
-            Debug.Log("A - AUTO Spawn/launch ball");
             StartCoroutine(AutoSpawnLaunchBall());
         }
     }
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
             DisplayUI();
         }
         isAuto = false;
+        TurnGameOff();
     }
 
     void DisplayUI()
