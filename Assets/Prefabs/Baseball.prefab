@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionParticle: {fileID: 484116338581106282, guid: 3e209b63dfa7cb144a4f53473aa27a78, type: 3}
+  trailParticle: {fileID: 2504848797901568637, guid: 2b520d756e2d5384ca6b3e3fe4fc9a7d, type: 3}
