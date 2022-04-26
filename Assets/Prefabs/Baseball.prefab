@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  speedY: 0.5
+  speedZ: 3
 --- !u!114 &-1140996264446715621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b123b4e807d8b44831dcaeec8eed8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionParticle: {fileID: 484116338581106282, guid: 3e209b63dfa7cb144a4f53473aa27a78, type: 3}

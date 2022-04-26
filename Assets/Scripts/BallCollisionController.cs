@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallCollisionController : MonoBehaviour
 {
     GameManager gm;
+    [SerializeField] ParticleSystem collisionParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class BallCollisionController : MonoBehaviour
         if (collision.gameObject.CompareTag("Bat"))
         {
             Debug.Log("HIT! - Audio: boom");
+            ParticleSystem ps = Instantiate(collisionParticle);
+            ps.transform.position = gameObject.transform.position;
+            collisionParticle.Play();
             gm.IncrementBallHitCount();
         }
     }
