@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             TurnPractice();
+            isAuto = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && practice.activeSelf)
         {
@@ -77,7 +78,9 @@ public class GameManager : MonoBehaviour
             DisplayUI();
         }
         isAuto = false;
-        TurnGameOff();
+
+        if(!practice.activeSelf)
+            TurnGameOff();
     }
 
     void DisplayUI()
