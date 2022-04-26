@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
             ballCount++;
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.LeftCommand))
         {
             if (isAuto)
             {
@@ -45,14 +45,14 @@ public class GameManager : MonoBehaviour
 
 
             isAuto = true;
-            Debug.Log("a - AUTO Spawn/launch ball");
+            Debug.Log("left-ctrl/cmd - AUTO Spawn/launch ball");
             StartCoroutine(AutoSpawnLaunchBall());
         }
     }
 
     IEnumerator AutoSpawnLaunchBall()
     {
-        while(ballCount < totalBalls)
+        while (ballCount < totalBalls)
         {
             yield return new WaitForSeconds(0.5f);
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             ballCount++;
             DisplayUI();
         }
+        isAuto = false;
     }
 
     void DisplayUI()
