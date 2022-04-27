@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SwingController : MonoBehaviour
 {
-    Rigidbody rb;
     [SerializeField] float speed;
+    [SerializeField] AudioSource swingAudio;
+    Rigidbody rb;
     bool isSwinging;
 
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class SwingController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = Vector3.zero;
+        swingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,8 @@ public class SwingController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Spacebar - TORQUE: Audio swing!");
+            //swingAudio.PlayScheduled(0.100f + AudioSettings.dspTime);
+            swingAudio.Play();
             isSwinging = true;
         }
     }

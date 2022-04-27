@@ -131,6 +131,7 @@ MonoBehaviour:
   speed: 2
   speedY: 0.5
   speedZ: 3
+  hasFired: 0
 --- !u!114 &-1140996264446715621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionParticle: {fileID: 484116338581106282, guid: 3e209b63dfa7cb144a4f53473aa27a78, type: 3}
   trailParticle: {fileID: 2504848797901568637, guid: 2b520d756e2d5384ca6b3e3fe4fc9a7d, type: 3}
+  hitClip: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}

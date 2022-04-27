@@ -17,12 +17,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOn;
     [SerializeField] GameObject gameOff;
     [SerializeField] GameObject practice;
+    [SerializeField] AudioClip tossClip;
 
     bool isAuto;
+    AudioSource audioPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
         DisplayUI();
     }
 
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && practice.activeSelf)
         {
             Debug.Log("1 - Spawn, SHOOT!, Audio: shoot!");
+            audioPlayer.PlayOneShot(tossClip, 1.0f);
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
                 .GetComponent<ThrowController>()
                 .ToggleShot();
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
 
             yield return new WaitForSeconds(2.0f);
+            audioPlayer.PlayOneShot(tossClip, 1.0f);
             ball.GetComponent<ThrowController>().ToggleShot();
             ballCount++;
             DisplayUI();

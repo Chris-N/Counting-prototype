@@ -7,14 +7,17 @@ public class BallCollisionController : MonoBehaviour
     GameManager gm;
     [SerializeField] ParticleSystem collisionParticle;
     [SerializeField] ParticleSystem trailParticle;
+    [SerializeField] AudioClip hitClip;
     ParticleSystem trailParticleInstance;
 
     bool isTrailParticleOn;
+    AudioSource audioPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class BallCollisionController : MonoBehaviour
         if (collision.gameObject.CompareTag("Bat"))
         {
             Debug.Log("HIT! - Audio: boom");
+            audioPlayer.PlayOneShot(hitClip, 1.0f);
             collisionParticle.transform.position = gameObject.transform.position;
             Instantiate(collisionParticle);
             collisionParticle.Play();
