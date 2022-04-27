@@ -128,10 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd300104b9a08242bbc7a3e6a9da25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  speedY: 0.5
-  speedZ: 3
-  hasFired: 0
+  _speedY: 0.5
+  _speedZ: 3
 --- !u!114 &-1140996264446715621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b123b4e807d8b44831dcaeec8eed8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionParticle: {fileID: 484116338581106282, guid: 3e209b63dfa7cb144a4f53473aa27a78, type: 3}
-  trailParticle: {fileID: 2504848797901568637, guid: 2b520d756e2d5384ca6b3e3fe4fc9a7d, type: 3}
-  hitClip: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
+  _hitClip: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
+  _collisionParticle: {fileID: 484116338581106282, guid: 3e209b63dfa7cb144a4f53473aa27a78, type: 3}
+  _trailParticle: {fileID: 2504848797901568637, guid: 2b520d756e2d5384ca6b3e3fe4fc9a7d, type: 3}

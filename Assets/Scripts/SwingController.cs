@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SwingController : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] AudioSource swingAudio;
-    Rigidbody rb;
-    bool isSwinging;
+    AudioSource _swingAudio;
+    Rigidbody _rb;
+    bool _isSwinging;
+    float _speed = 100.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = Vector3.zero;
-        swingAudio = GetComponent<AudioSource>();
+        _rb = GetComponent<Rigidbody>();
+        _rb.centerOfMass = Vector3.zero;
+        _swingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,20 +22,20 @@ public class SwingController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            swingAudio.Play();
-            isSwinging = true;
+            _swingAudio.Play();
+            _isSwinging = true;
         }
     }
 
     void FixedUpdate()
     {
-        if (isSwinging)
+        if (_isSwinging)
             Swing();
     }
 
     void Swing()
     {
-        rb.AddRelativeTorque(Vector3.up * -speed, ForceMode.Impulse);
-        isSwinging = false;
+        _rb.AddRelativeTorque(Vector3.up * -_speed, ForceMode.Impulse);
+        _isSwinging = false;
     }
 }

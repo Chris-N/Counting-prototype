@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ThrowController : MonoBehaviour
 {
-    Rigidbody rb;
-    [SerializeField] float speed;
-    [SerializeField] float speedY = 0.5f;
-    [SerializeField] float speedZ = 3.0f;
-    [SerializeField] bool hasFired = false;
-    bool isShot = false;
+    [SerializeField] float _speedY = 0.5f;
+    [SerializeField] float _speedZ = 3.0f;
+
+    Rigidbody _rb;
+    bool _hasFired = false;
+    bool _isShot = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -25,20 +25,20 @@ public class ThrowController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isShot && !hasFired)
+        if (_isShot && !_hasFired)
         {
-            Vector3 force1 = Vector3.back * speedZ;
-            Vector3 force2 = Vector3.up * speedY;
+            Vector3 force1 = Vector3.back * _speedZ;
+            Vector3 force2 = Vector3.up * _speedY;
 
             Vector3 result = force1 + force2;
-            rb.AddForce(result, ForceMode.Impulse);
-            isShot = false;
-            hasFired = true;
+            _rb.AddForce(result, ForceMode.Impulse);
+            _isShot = false;
+            _hasFired = true;
         }
     }
 
     public void ToggleShot()
     {
-        isShot = !isShot;
+        _isShot = !_isShot;
     }
 }

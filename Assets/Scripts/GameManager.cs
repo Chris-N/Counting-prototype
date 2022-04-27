@@ -6,26 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject baseball;
-    [SerializeField] GameObject spawnPoint;
-    [SerializeField] int totalBalls;
-    [SerializeField] int ballCount = 0;
-    [SerializeField] int ballsHitCount = 0;
-    [SerializeField] GameObject popup;
-    [SerializeField] TextMeshProUGUI hitsText;
-    [SerializeField] TextMeshProUGUI totalsText;
-    [SerializeField] GameObject gameOn;
-    [SerializeField] GameObject gameOff;
-    [SerializeField] GameObject practice;
-    [SerializeField] AudioClip tossClip;
+    [SerializeField] AudioClip _tossClip;
+    [SerializeField] GameObject _baseball;
+    [SerializeField] GameObject _spawnPoint;
+    [SerializeField] GameObject _popup;
+    [SerializeField] GameObject _gameOn;
+    [SerializeField] GameObject _gameOff;
+    [SerializeField] GameObject _practice;
+    [SerializeField] TextMeshProUGUI _hitsText;
+    [SerializeField] TextMeshProUGUI _totalsText;
+    [SerializeField] int _totalBalls;
+    [SerializeField] int _ballCount = 0;
+    [SerializeField] int _ballsHitCount = 0;
 
-    bool isAuto;
-    AudioSource audioPlayer;
+    AudioSource _audioPlayer;
+    bool _isAuto;
 
     // Start is called before the first frame update
     void Start()
     {
-        audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
+        _audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
         DisplayUI();
     }
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            popup.SetActive(!popup.activeSelf);
+            _popup.SetActive(!_popup.activeSelf);
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -42,80 +42,80 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TurnPractice();
-            isAuto = false;
+            Turn_practice();
+            _isAuto = false;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && practice.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && _practice.activeSelf)
         {
-            audioPlayer.PlayOneShot(tossClip, 0.2f);
-            Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
+            _audioPlayer.PlayOneShot(_tossClip, 0.2f);
+            Instantiate(_baseball, _spawnPoint.transform.position, _baseball.transform.rotation)
                 .GetComponent<ThrowController>()
                 .ToggleShot();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (isAuto)
+            if (_isAuto)
             {
-                TurnGameOff();
-                isAuto = false;
+                Turn_gameOff();
+                _isAuto = false;
                 StopCoroutine(AutoSpawnLaunchBall());
                 return;
             }
 
-            isAuto = true;
-            TurnGameOn();
+            _isAuto = true;
+            Turn_gameOn();
             StartCoroutine(AutoSpawnLaunchBall());
         }
     }
 
     IEnumerator AutoSpawnLaunchBall()
     {
-        while (ballCount < totalBalls && isAuto)
+        while (_ballCount < _totalBalls && _isAuto)
         {
             yield return new WaitForSeconds(0.5f);
-            GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
+            GameObject ball = Instantiate(_baseball, _spawnPoint.transform.position, _baseball.transform.rotation);
 
             yield return new WaitForSeconds(2.0f);
-            audioPlayer.PlayOneShot(tossClip, 0.2f);
+            _audioPlayer.PlayOneShot(_tossClip, 0.2f);
             ball.GetComponent<ThrowController>().ToggleShot();
-            ballCount++;
+            _ballCount++;
             DisplayUI();
         }
-        isAuto = false;
+        _isAuto = false;
 
-        if(!practice.activeSelf)
-            TurnGameOff();
+        if(!_practice.activeSelf)
+            Turn_gameOff();
     }
 
     void DisplayUI()
     {
-        hitsText.text = $"Hits: {ballsHitCount}";
-        totalsText.text = $"Total: {ballCount}/{totalBalls}";
+        _hitsText.text = $"Hits: {_ballsHitCount}";
+        _totalsText.text = $"Total: {_ballCount}/{_totalBalls}";
     }
     public void IncrementBallHitCount()
     {
-        if (!gameOn.activeSelf)
+        if (!_gameOn.activeSelf)
             return;
-        ballsHitCount++;
+        _ballsHitCount++;
         DisplayUI();
     }
 
-    void TurnGameOn()
+    void Turn_gameOn()
     {
-        gameOn.SetActive(true);
-        gameOff.SetActive(false);
-        practice.SetActive(false);
+        _gameOn.SetActive(true);
+        _gameOff.SetActive(false);
+        _practice.SetActive(false);
     }
-    void TurnGameOff()
+    void Turn_gameOff()
     {
-        gameOn.SetActive(false);
-        gameOff.SetActive(true);
-        practice.SetActive(false);
+        _gameOn.SetActive(false);
+        _gameOff.SetActive(true);
+        _practice.SetActive(false);
     }
-    void TurnPractice()
+    void Turn_practice()
     {
-        gameOn.SetActive(false);
-        gameOff.SetActive(false);
-        practice.SetActive(true);
+        _gameOn.SetActive(false);
+        _gameOff.SetActive(false);
+        _practice.SetActive(true);
     }
 }

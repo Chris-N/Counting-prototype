@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class BallCollisionController : MonoBehaviour
 {
-    [SerializeField] ParticleSystem collisionParticle;
-    [SerializeField] ParticleSystem trailParticle;
-    [SerializeField] AudioClip hitClip;
+    [SerializeField] AudioClip _hitClip;
+    [SerializeField] ParticleSystem _collisionParticle;
+    [SerializeField] ParticleSystem _trailParticle;
 
-    GameManager gm;
-    ParticleSystem trailParticleInstance;
-    AudioSource audioPlayer;
-    bool isTrailParticleOn;
+    GameManager _gm;
+    ParticleSystem _trailParticleInstance;
+    AudioSource _audioPlayer;
+    bool _isTrailParticleOn;
 
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
+        _gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _audioPlayer = GameObject.Find("Global Audio").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,34 +25,34 @@ public class BallCollisionController : MonoBehaviour
     {
         ClearResource();
 
-        if (isTrailParticleOn)
-            trailParticleInstance.transform.position = gameObject.transform.position;
+        if (_isTrailParticleOn)
+            _trailParticleInstance.transform.position = gameObject.transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bat"))
         {
-            audioPlayer.PlayOneShot(hitClip, 0.4f);
-            collisionParticle.transform.position = gameObject.transform.position;
-            Instantiate(collisionParticle);
-            collisionParticle.Play();
+            _audioPlayer.PlayOneShot(_hitClip, 0.4f);
+            _collisionParticle.transform.position = gameObject.transform.position;
+            Instantiate(_collisionParticle);
+            _collisionParticle.Play();
 
-            trailParticle.transform.position = gameObject.transform.position;
-            trailParticleInstance = Instantiate(trailParticle);
-            trailParticleInstance.Play();
-            isTrailParticleOn = true;
+            _trailParticle.transform.position = gameObject.transform.position;
+            _trailParticleInstance = Instantiate(_trailParticle);
+            _trailParticleInstance.Play();
+            _isTrailParticleOn = true;
 
-            gm.IncrementBallHitCount();
+            _gm.IncrementBallHitCount();
         }
     }
     private void ClearResource()
     {
         if(gameObject.transform.position.y < -20)
         {
-            isTrailParticleOn = false;
-            if(trailParticleInstance)
-                Destroy(trailParticleInstance.gameObject);
+            _isTrailParticleOn = false;
+            if(_trailParticleInstance)
+                Destroy(_trailParticleInstance.gameObject);
             Destroy(gameObject);
         }
 
