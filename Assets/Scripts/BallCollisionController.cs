@@ -33,7 +33,7 @@ public class BallCollisionController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bat"))
         {
-            _audioPlayer.PlayOneShot(_hitClip, 0.4f);
+            _audioPlayer.PlayOneShot(_hitClip, 0.5f);
             _collisionParticle.transform.position = gameObject.transform.position;
             Instantiate(_collisionParticle);
             _collisionParticle.Play();

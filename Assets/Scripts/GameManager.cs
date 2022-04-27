@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -13,14 +14,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _gameOn;
     [SerializeField] GameObject _gameOff;
     [SerializeField] GameObject _practice;
+    [SerializeField] GameObject _congratsText;
     [SerializeField] TextMeshProUGUI _hitsText;
     [SerializeField] TextMeshProUGUI _totalsText;
-    [SerializeField] int _totalBalls;
-    [SerializeField] int _ballCount = 0;
-    [SerializeField] int _ballsHitCount = 0;
 
     AudioSource _audioPlayer;
     bool _isAuto;
+    int _ballCount = 0;
+    int _ballsHitCount = 0;
+    int _totalBalls = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && _practice.activeSelf)
         {
-            _audioPlayer.PlayOneShot(_tossClip, 0.2f);
+            _audioPlayer.PlayOneShot(_tossClip, 0.3f);
             Instantiate(_baseball, _spawnPoint.transform.position, _baseball.transform.rotation)
                 .GetComponent<ThrowController>()
                 .ToggleShot();
@@ -76,17 +78,35 @@ public class GameManager : MonoBehaviour
             GameObject ball = Instantiate(_baseball, _spawnPoint.transform.position, _baseball.transform.rotation);
 
             yield return new WaitForSeconds(2.0f);
-            _audioPlayer.PlayOneShot(_tossClip, 0.2f);
+            _audioPlayer.PlayOneShot(_tossClip, 0.3f);
             ball.GetComponent<ThrowController>().ToggleShot();
             _ballCount++;
             DisplayUI();
         }
+        if (_ballCount == _totalBalls && _isAuto)
+        {
+            yield return new WaitForSeconds(1.5f);
+            _congratsText.SetActive(true);
+            _congratsText.GetComponent<TextMeshProUGUI>().text = $"Congrats!! <br>{ResultPercent()}% hit accuracy with {DisplayResultHits()}";
+            yield return new WaitForSeconds(5.0f);
+            _congratsText.SetActive(false);
+        }
         _isAuto = false;
 
-        if(!_practice.activeSelf)
+        if (!_practice.activeSelf)
             Turn_gameOff();
     }
+    string DisplayResultHits()
+    {
+        if (_ballsHitCount != 1)
+            return $"{_ballsHitCount} hits";
+        return $"{_ballsHitCount} hit";
+    }
 
+    double ResultPercent()
+    {
+        return Math.Round((double)_ballsHitCount / _totalBalls * 100, 0);
+    }
     void DisplayUI()
     {
         _hitsText.text = $"Hits: {_ballsHitCount}";
