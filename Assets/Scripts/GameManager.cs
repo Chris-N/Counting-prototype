@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1) && practice.activeSelf)
         {
-            Debug.Log("1 - Spawn, SHOOT!, Audio: shoot!");
-            audioPlayer.PlayOneShot(tossClip, 1.0f);
+            audioPlayer.PlayOneShot(tossClip, 0.2f);
             Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation)
                 .GetComponent<ThrowController>()
                 .ToggleShot();
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
             GameObject ball = Instantiate(baseball, spawnPoint.transform.position, baseball.transform.rotation);
 
             yield return new WaitForSeconds(2.0f);
-            audioPlayer.PlayOneShot(tossClip, 1.0f);
+            audioPlayer.PlayOneShot(tossClip, 0.2f);
             ball.GetComponent<ThrowController>().ToggleShot();
             ballCount++;
             DisplayUI();

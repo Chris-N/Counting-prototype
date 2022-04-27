@@ -8,7 +8,6 @@ public class ThrowController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float speedY = 0.5f;
     [SerializeField] float speedZ = 3.0f;
-
     [SerializeField] bool hasFired = false;
     bool isShot = false;
 

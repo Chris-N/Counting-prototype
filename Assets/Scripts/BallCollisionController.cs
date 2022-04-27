@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BallCollisionController : MonoBehaviour
 {
-    GameManager gm;
     [SerializeField] ParticleSystem collisionParticle;
     [SerializeField] ParticleSystem trailParticle;
     [SerializeField] AudioClip hitClip;
-    ParticleSystem trailParticleInstance;
 
-    bool isTrailParticleOn;
+    GameManager gm;
+    ParticleSystem trailParticleInstance;
     AudioSource audioPlayer;
+    bool isTrailParticleOn;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +33,7 @@ public class BallCollisionController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bat"))
         {
-            Debug.Log("HIT! - Audio: boom");
-            audioPlayer.PlayOneShot(hitClip, 1.0f);
+            audioPlayer.PlayOneShot(hitClip, 0.4f);
             collisionParticle.transform.position = gameObject.transform.position;
             Instantiate(collisionParticle);
             collisionParticle.Play();

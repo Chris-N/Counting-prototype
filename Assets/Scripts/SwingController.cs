@@ -22,8 +22,6 @@ public class SwingController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Spacebar - TORQUE: Audio swing!");
-            //swingAudio.PlayScheduled(0.100f + AudioSettings.dspTime);
             swingAudio.Play();
             isSwinging = true;
         }
