@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     bool _isAuto;
     int _ballCount = 0;
     int _ballsHitCount = 0;
-    int _totalBalls = 5;
+    int _totalBalls = 10;
 
     // Start is called before the first frame update
     void Start()
